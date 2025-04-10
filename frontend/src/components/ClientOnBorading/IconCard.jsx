@@ -1,8 +1,11 @@
 import React from "react";
 
-const IconCard = ({ name, icon }) => {
+const IconCard = ({ name, icon, addElement }) => {
   return (
-    <div className="bg-white flex flex-col items-center justify-center w-[100px] h-[100px] border-2 border-[#EAECF0] rounded-lg cursor-pointer">
+    <div
+      className="bg-white flex flex-col items-center justify-center w-[100px] h-[100px] border-2 border-[#EAECF0] rounded-lg cursor-pointer"
+      onClick={() => addElement(name)}
+    >
       <div className="flex bg-[#F2F4F7] w-full items-center border-[#EAECF0] justify-center p-5 h-[80px]">
         <div className="flex items-center text-[#667085] bg-[#F9AFB]">
           <img src={icon} alt={name} />
@@ -15,5 +18,4 @@ const IconCard = ({ name, icon }) => {
     </div>
   );
 };
-
 export default IconCard;

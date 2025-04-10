@@ -1,62 +1,50 @@
 import React from "react";
 import FormHeader from "./FormHeader";
-import MultiSelect from "./MultiSelect";
+import { closestCorners, DndContext } from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import FormField from "./FormField";
 
-const CenterForm = () => {
+const CenterForm = ({ fields, setFields }) => {
+  const getPostion = (id) => {
+    return fields.findIndex((field) => field.id === id);
+  };
+
+  const handleDragEnd = (e) => {
+    const { active, over } = e;
+
+    if (active.id === over.id) return;
+
+    setFields((prevFields) => {
+      const originalPos = getPostion(active.id);
+      const latestPos = getPostion(over.id);
+      return arrayMove(prevFields, originalPos, latestPos);
+    });
+  };
+
   return (
     <div className="w-[60%] ml-[36px] mr-[36px] mt-[14px]">
       <FormHeader />
 
-      <div className=" border-b border-l border-r h-full border-[#D0D5DD] rounded-md shadow-xs p-[24px] ">
-        <div className="flex flex-col mb-6">
-          <label
-            htmlFor=""
-            className="text-[14px] font-Inter font-medium text-[#344054] tracking-wide"
-          >
-            Company Name
-          </label>
-          <input
-            type="text"
-            placeholder="Enter company name"
-            className=" w-[35%] border border-[#D0D5DD] rounded-md shadow-xs p-[6px] focus:border-[#D6BBFB] focus:ring-[#D6BBFB] focus:outline-none"
-          />
-        </div>
-
-        <div className="flex flex-col mb-6">
-          <label
-            htmlFor=""
-            className="text-[14px] font-Inter font-medium text-[#344054] tracking-wide"
-          >
-            Business Goals & Objectives
-          </label>
-          <textarea
-            rows="5"
-            resize="none"
-            type="text"
-            placeholder="Enter Business Goals & Objectives"
-            className=" w-full border border-[#D0D5DD] rounded-md shadow-xs p-[6px] focus:border-[#D6BBFB] focus:ring-[#D6BBFB] focus:outline-none"
-          />
-        </div>
-
-        <div className="flex flex-col cursor-pointer">
-          <label
-            htmlFor=""
-            className="text-[14px] font-Inter font-medium text-[#344054] tracking-wide"
-          >
-            Industry
-          </label>
-          <div className="font-Inter text-[12px] font-semibold text-[#667085] border border-[#D0D5DD] rounded-md shadow-xs p-3  items-center">
-            <div className="border-b border-[#D0D5DD] m-2">MULTI SELECT</div>
-            <MultiSelect id={1} name={"Technology"} />
-            <MultiSelect id={2} name={"Finance"} />
-            <MultiSelect id={3} name={"Healthcare"} />
-            <MultiSelect id={4} name={"Retail"} />
-            <button className="h-[30px] w-[40px] border border-[#D0D5DD] rounded-md">
-              Add
-            </button>
+      <DndContext
+        onDragEnd={handleDragEnd}
+        collisionDetection={closestCorners}
+        autoScroll={true}
+      >
+        <SortableContext
+          items={fields.map((field) => field.id)}
+          strategy={verticalListSortingStrategy}
+        >
+          <div className="border-b border-l border-r border-t h-full border-[#D0D5DD] rounded-md shadow-xs p-[24px]">
+            {fields.map((field) => (
+              <FormField key={field.id} field={field} />
+            ))}
           </div>
-        </div>
-      </div>
+        </SortableContext>
+      </DndContext>
     </div>
   );
 };
