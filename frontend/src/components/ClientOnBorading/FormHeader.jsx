@@ -4,7 +4,7 @@ import { TbArrowsShuffle } from "react-icons/tb";
 
 const FormHeader = () => {
   return (
-    <div className="flex flex-row items-center justify-between bg-[#F9FAFB] pl-[32px] pr-[32px] pt-[20px] pb-[20px] border border-[#EAECF0] rounded-xl">
+    <div className="flex flex-row items-center justify-between bg-[#F9FAFB] pl-[32px] pr-[32px] pt-[20px] pb-[20px] border border-[#EAECF0] rounded-t-md rounded-r-md">
       <div className="font-Inter text-[18px] font-semibold">
         Clients Requirements
       </div>

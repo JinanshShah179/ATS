@@ -38,7 +38,7 @@ const CenterForm = ({ fields, setFields }) => {
           items={fields.map((field) => field.id)}
           strategy={verticalListSortingStrategy}
         >
-          <div className="border-b border-l border-r border-t h-full border-[#D0D5DD] rounded-md shadow-xs p-[24px]">
+          <div className="border-b border-l border-r border-t h-full border-[#D0D5DD] rounded-b-md shadow-xs p-[24px]">
             {fields.map((field) => (
               <FormField key={field.id} field={field} />
             ))}

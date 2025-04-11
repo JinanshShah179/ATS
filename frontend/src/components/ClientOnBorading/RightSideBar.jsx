@@ -29,7 +29,12 @@ const RightSideBar = ({ onAddElement }) => {
         <ReusableH1 heading="SIGNATURE ELEMENTS" />
         <div className="grid grid-cols-2 gap-3 mr-[23px] mb-6">
           {signatureElements.map((item, index) => (
-            <IconCard key={index} name={item.name} icon={item.icon} />
+            <IconCard
+              key={index}
+              name={item.name}
+              icon={item.icon}
+              addElement={onAddElement}
+            />
           ))}
         </div>
         <Divider />
@@ -37,7 +42,12 @@ const RightSideBar = ({ onAddElement }) => {
         <ReusableH1 heading="TEXT ELEMENTS" />
         <div className="grid grid-cols-2 gap-3 mr-[23px] mb-6">
           {textElements.map((item, index) => (
-            <IconCard key={index} name={item.name} icon={item.icon} />
+            <IconCard
+              key={index}
+              name={item.name}
+              icon={item.icon}
+              addElement={onAddElement}
+            />
           ))}
         </div>
         <Divider />
@@ -45,7 +55,12 @@ const RightSideBar = ({ onAddElement }) => {
         <ReusableH1 heading="VISUAL ELEMENTS" />
         <div className="grid grid-cols-2 gap-3 mr-[23px] mb-6">
           {visualElements.map((item, index) => (
-            <IconCard key={index} name={item.name} icon={item.icon} />
+            <IconCard
+              key={index}
+              name={item.name}
+              icon={item.icon}
+              addElement={onAddElement}
+            />
           ))}
         </div>
       </div>

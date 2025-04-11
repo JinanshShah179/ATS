@@ -14,14 +14,18 @@ const Steps = ({ step, index }) => {
     <div
       ref={setNodeRef}
       style={style}
-      className="flex items-center w-full gap-2 p-1"
+      className={"flex items-center w-full gap-2 p-1 "}
       {...attributes}
     >
       <span className="text-[14px] font-Inter font-medium text-[#475467]">
         {index + 1}.
       </span>
       <div
-        className="flex w-full text-[14px] font-Inter font-medium tracking-wide text-[#101828] items-center gap-2 rounded-lg cursor-grab pt-[10px] pr-[12px] pl-[12px] pb-[10px] border border-[#EAECF0] shadow-xs"
+        className={`flex w-full text-[14px] font-Inter font-medium tracking-wide text-[#101828] items-center gap-2 rounded-lg cursor-grab pt-[10px] pr-[12px] pl-[12px] pb-[10px]  shadow-xs ${
+          index === 0
+            ? "border border-[#7F56D9] bg-[#F9F5FF]"
+            : "border border-[#EAECF0]"
+        }`}
         {...listeners}
       >
         {step.name}
