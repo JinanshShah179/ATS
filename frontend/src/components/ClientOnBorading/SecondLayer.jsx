@@ -3,7 +3,7 @@ import { IoArrowBack } from "react-icons/io5";
 import { FaRegCircleDot } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa6";
 
-const SecondLayer = () => {
+const SecondLayer = ({ handleSaveasDraft }) => {
   return (
     <div className="flex flex-row justify-between items-center border-b border-[1px] border-[#EAECF0] bg-white pb-4">
       <div className="flex items-center justify-center gap-3 pl-6 pt-3">
@@ -29,7 +29,10 @@ const SecondLayer = () => {
         <button className="border-2 border-[#D0D5DD] rounded-lg p-[10px] cursor-pointer gap-3 shadow-xs">
           <img src="/public/settings-02.svg" alt="" />
         </button>
-        <button className="font-Inter text-[14px] text-[#344054] font-semibold border-2 border-[#D0D5DD] rounded-lg pt-[8px] pl-[12px] pr-[12px] pb-[8px] cursor-pointer shadow-xs">
+        <button
+          onClick={handleSaveasDraft}
+          className="font-Inter text-[14px] text-[#344054] font-semibold border-2 border-[#D0D5DD] rounded-lg pt-[8px] pl-[12px] pr-[12px] pb-[8px] cursor-pointer shadow-xs"
+        >
           Save as Draft
         </button>
         <button className="font-Inter text-[14px] border border-[#7F56D9] bg-[#7F56D9] text-white rounded-lg pt-[8px] pl-[12px] pr-[12px] pb-[8px] cursor-pointer shadow-xs">

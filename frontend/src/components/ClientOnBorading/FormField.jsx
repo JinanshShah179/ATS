@@ -4,21 +4,24 @@ import { useSortable } from "@dnd-kit/sortable";
 import { MdOutlineDragIndicator } from "react-icons/md";
 import { Divider } from "antd";
 import MultiSelect from "./MultiSelect";
-const FormField = ({ field }) => {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
-    id: field.id,
-  });
+
+const FormField = ({ field, onFieldChange }) => {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: field.id,
+    });
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+  };
+
+  const handleChange = (e) => {
+    onFieldChange(field.id, e.target.value);
+  };
+
+  const handleMultiSelectChange = (selectedOptions) => {
+    onFieldChange(field.id, selectedOptions);
   };
 
   return (
@@ -50,6 +53,8 @@ const FormField = ({ field }) => {
         <input
           type={field.type}
           placeholder={field.placeholder}
+          value={field.value || ""}
+          onChange={handleChange}
           className="w-[35%] border border-[#D0D5DD] rounded-md shadow-xs p-[6px] focus:border-[#D6BBFB] focus:ring-[#D6BBFB] focus:outline-none"
           onMouseDown={(e) => e.stopPropagation()}
         />
@@ -57,6 +62,8 @@ const FormField = ({ field }) => {
       {(field.type === "textarea" || field.type === "address") && (
         <textarea
           placeholder={field.placeholder}
+          value={field.value || ""}
+          onChange={handleChange}
           rows={5}
           className="w-full border border-[#D0D5DD] rounded-md shadow-xs p-[6px] focus:border-[#D6BBFB] focus:ring-[#D6BBFB] focus:outline-none"
           onMouseDown={(e) => e.stopPropagation()}
@@ -69,7 +76,13 @@ const FormField = ({ field }) => {
             {field.type === "multi-select" ? "MULTI SELECT" : "SINGLE SELECT"}
           </h3>
           {field.options?.map((option, index) => (
-            <MultiSelect key={index} id={index} name={option} />
+            <MultiSelect
+              key={index}
+              id={index}
+              name={option}
+              selected={field.value?.includes(option)}
+              onChange={() => handleMultiSelectChange(option)}
+            />
           ))}
           <button className="h-[35px] ml-3 mb-2 w-[45px] border border-[#D0D5DD] rounded-md">
             Add
@@ -86,6 +99,8 @@ const FormField = ({ field }) => {
                   type={field.type}
                   name={field.label}
                   value={option}
+                  checked={field.value === option}
+                  onChange={handleChange}
                   className="ml-2"
                   onMouseDown={(e) => e.stopPropagation()}
                 />
